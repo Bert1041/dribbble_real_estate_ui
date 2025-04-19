@@ -1,7 +1,9 @@
 import 'package:dribbble_real_estate_ui/constants/colors.dart';
 import 'package:dribbble_real_estate_ui/state/cubit/navigation_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({super.key});
@@ -11,21 +13,21 @@ class CustomBottomNavBar extends StatelessWidget {
     // final currentIndex = context.watch<NavigationCubit>().state;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 55, vertical: 20),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
         decoration: BoxDecoration(
-          color: AppColors.blackShade,
+          color: AppColors.blackShade100,
           borderRadius: BorderRadius.circular(40),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildItem(context, Icons.search, 0),
-            _buildItem(context, Icons.chat_bubble_outline, 1),
-            _buildItem(context, Icons.home_filled, 2),
-            _buildItem(context, Icons.favorite, 3),
-            _buildItem(context, Icons.person, 4),
+            _buildItem(context, CupertinoIcons.search, 0),
+            _buildItem(context, CupertinoIcons.chat_bubble_text_fill, 1),
+            _buildItem(context, CupertinoIcons.house_alt_fill, 2),
+            _buildItem(context, CupertinoIcons.heart_fill, 3),
+            _buildItem(context, CupertinoIcons.person_fill, 4),
           ],
         ),
       ),
@@ -38,8 +40,8 @@ class CustomBottomNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.read<NavigationCubit>().changeTab(index),
       child: Container(
-        width: 50,
-        height: 50,
+        width: 45.w,
+        height: 45.h,
         decoration: BoxDecoration(
           color: isActive ? AppColors.orangeShade : AppColors.blackShade,
           shape: BoxShape.circle,

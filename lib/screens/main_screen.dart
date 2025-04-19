@@ -1,3 +1,4 @@
+import 'package:dribbble_real_estate_ui/constants/colors.dart';
 import 'package:dribbble_real_estate_ui/screens/chat_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/favorites_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/home_screen.dart';
@@ -27,7 +28,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationCubit, int>(
       builder: (context, currentIndex) {
-        return Scaffold(body: SafeArea(child: _screens[currentIndex]));
+        return Scaffold(
+          backgroundColor: AppColors.white,
+          body: SafeArea(child: _screens[currentIndex]),
+        );
       },
     );
   }
