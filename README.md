@@ -68,8 +68,10 @@ The goal was to accurately replicate the UI design, animations, and scroll behav
 
 ## Screenshots
 
-![Home Screen](screenshots/home.png)
-![Search Screen](screenshots/search.png)
+| ![Home Screen](screenshots/home.png) | ![Search Screen](screenshots/search.png) |
+|:-----------------------------------:|:----------------------------------------:|
+| Home Screen                         | Search Screen                            |
+
 
 ## Known Limitations
 
