@@ -1,7 +1,8 @@
-import 'package:dribbble_real_estate_ui/constants/colors.dart';
-import 'package:dribbble_real_estate_ui/constants/lists.dart';
-import 'package:dribbble_real_estate_ui/mixins/map_mixin.dart';
-import 'package:dribbble_real_estate_ui/service/marker_service.dart';
+import 'package:dribbble_real_estate_ui/config/components/slide_up_animation.dart';
+import 'package:dribbble_real_estate_ui/config/constants/colors.dart';
+import 'package:dribbble_real_estate_ui/config/constants/lists.dart';
+import 'package:dribbble_real_estate_ui/core/mixins/map_mixin.dart';
+import 'package:dribbble_real_estate_ui/core/service/marker_service.dart';
 import 'package:dribbble_real_estate_ui/widgets/bottom_bar.dart';
 import 'package:dribbble_real_estate_ui/widgets/search_field.dart';
 import 'package:dribbble_real_estate_ui/widgets/variant_pill.dart';
@@ -100,11 +101,14 @@ class SearchScreenState extends State<SearchScreen> with MapMixin {
                 ),
               ),
 
-              const Positioned(
-                bottom: 0,
+              // Bottom Nav with reusable animation
+              Positioned(
                 left: 0,
                 right: 0,
-                child: CustomBottomNavBar(),
+                bottom: 0,
+                child: SlideUpAnimation(
+                  child: const CustomBottomNavBar(),
+                ),
               ),
             ],
           );

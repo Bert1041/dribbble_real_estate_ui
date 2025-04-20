@@ -1,10 +1,10 @@
-import 'package:dribbble_real_estate_ui/constants/colors.dart';
+import 'package:dribbble_real_estate_ui/config/constants/colors.dart';
+import 'package:dribbble_real_estate_ui/core/state/cubit/navigation_cubit.dart' show NavigationCubit;
 import 'package:dribbble_real_estate_ui/screens/chat_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/favorites_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/home_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/profile_screen.dart';
 import 'package:dribbble_real_estate_ui/screens/search_screen.dart';
-import 'package:dribbble_real_estate_ui/state/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

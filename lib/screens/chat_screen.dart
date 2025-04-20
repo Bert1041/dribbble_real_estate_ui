@@ -1,3 +1,4 @@
+import 'package:dribbble_real_estate_ui/config/components/slide_up_animation.dart';
 import 'package:dribbble_real_estate_ui/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +13,14 @@ class ChatScreen extends StatelessWidget {
           // Main content
           Center(child: Text('Chat Screen')),
 
-          // Bottom navigation
-          const Positioned(
-            bottom: 0,
+          // Bottom Nav with reusable animation
+          Positioned(
             left: 0,
             right: 0,
-            child: CustomBottomNavBar(),
+            bottom: 0,
+            child: SlideUpAnimation(
+              child: const CustomBottomNavBar(),
+            ),
           ),
         ],
       ),

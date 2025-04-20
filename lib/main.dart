@@ -1,5 +1,5 @@
+import 'package:dribbble_real_estate_ui/core/state/cubit/navigation_cubit.dart';
 import 'package:dribbble_real_estate_ui/screens/main_screen.dart';
-import 'package:dribbble_real_estate_ui/state/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,5 +30,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,4 +1,4 @@
-import 'package:dribbble_real_estate_ui/constants/colors.dart';
+import 'package:dribbble_real_estate_ui/config/constants/colors.dart';
 import 'package:dribbble_real_estate_ui/widgets/location_card.dart';
 import 'package:flutter/material.dart';
 

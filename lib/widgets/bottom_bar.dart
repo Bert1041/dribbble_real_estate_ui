@@ -1,5 +1,5 @@
-import 'package:dribbble_real_estate_ui/constants/colors.dart';
-import 'package:dribbble_real_estate_ui/state/cubit/navigation_cubit.dart';
+import 'package:dribbble_real_estate_ui/config/constants/colors.dart';
+import 'package:dribbble_real_estate_ui/core/state/cubit/navigation_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +37,7 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget _buildItem(BuildContext context, IconData icon, int index) {
     final isActive = context.watch<NavigationCubit>().state == index;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => context.read<NavigationCubit>().changeTab(index),
       child: Container(
         width: 45.w,

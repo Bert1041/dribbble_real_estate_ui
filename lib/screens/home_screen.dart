@@ -1,3 +1,4 @@
+import 'package:dribbble_real_estate_ui/config/components/slide_up_animation.dart';
 import 'package:dribbble_real_estate_ui/widgets/custom_app_bar.dart';
 import 'package:dribbble_real_estate_ui/widgets/extended_app_bar.dart';
 import 'package:dribbble_real_estate_ui/widgets/location_list.dart';
@@ -26,12 +27,14 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
 
-          // Bottom Nav
-          const Positioned(
+          // Bottom Nav with reusable animation
+          Positioned(
             left: 0,
             right: 0,
             bottom: 0,
-            child: CustomBottomNavBar(),
+            child: SlideUpAnimation(
+              child: const CustomBottomNavBar(),
+            ),
           ),
         ],
       ),
