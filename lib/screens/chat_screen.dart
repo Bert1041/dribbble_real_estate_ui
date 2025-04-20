@@ -1,8 +1,5 @@
-import 'package:dribbble_real_estate_ui/main.dart';
-import 'package:dribbble_real_estate_ui/state/cubit/navigation_cubit.dart';
 import 'package:dribbble_real_estate_ui/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
