@@ -1,3 +1,4 @@
+import 'package:dribbble_real_estate_ui/config/components/reusable_animation.dart';
 import 'package:dribbble_real_estate_ui/config/components/slide_up_animation.dart';
 import 'package:dribbble_real_estate_ui/config/constants/colors.dart';
 import 'package:dribbble_real_estate_ui/config/constants/lists.dart';
@@ -20,6 +21,8 @@ class SearchScreenState extends State<SearchScreen> with MapMixin {
   final MarkerService _markerService = MarkerService();
   final LatLng _center = const LatLng(6.5176, 3.3862);
   late Future<Set<Marker>> _markersFuture;
+  Set<Marker> _currentMarkers = {};
+  bool _mapReady = false;
 
   @override
   void initState() {
@@ -33,6 +36,9 @@ class SearchScreenState extends State<SearchScreen> with MapMixin {
       iconColor: AppColors.white,
       borderColor: AppColors.orangeShade,
     );
+    _markersFuture.then((markers) {
+      if (mounted) setState(() => _currentMarkers = markers);
+    });
   }
 
   void _handleMarkerTap(int index) {
@@ -42,77 +48,81 @@ class SearchScreenState extends State<SearchScreen> with MapMixin {
   }
 
   @override
+  void onMapCreated(GoogleMapController controller) {
+    super.onMapCreated(controller);
+    setState(() => _mapReady = true);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<Set<Marker>>(
-        future: _markersFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: Stack(
+        children: [
+          // Show map before markers are loaded
+          GoogleMap(
+            onMapCreated: onMapCreated,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 17.0,
+            ),
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: false,
+            scrollGesturesEnabled: true,
+            tiltGesturesEnabled: true,
+            rotateGesturesEnabled: true,
+            mapType: MapType.normal,
+            markers: _currentMarkers,
+          ),
 
-          return Stack(
-            children: [
-              GoogleMap(
-                onMapCreated: onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: _center,
-                  zoom: 17.0,
-                ),
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-                zoomGesturesEnabled: true,
-                zoomControlsEnabled: false,
-                scrollGesturesEnabled: true,
-                tiltGesturesEnabled: true,
-                rotateGesturesEnabled: true,
-                mapType: MapType.normal,
-                markers: snapshot.data!,
-              ),
+          // Show loading indicator until markers are loaded
+          if (!_mapReady || _currentMarkers.isEmpty)
+            const Center(child: CircularProgressIndicator()),
 
-              Positioned(
-                top: 20,
-                left: 16,
-                right: 16,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const SearchField(),
-                ),
-              ),
+          Positioned(
+            top: 20,
+            left: 16,
+            right: 16,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: const SearchField(),
+            ),
+          ),
 
-              Positioned(
-                bottom: 100,
-                left: 16,
-                right: 16,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _floatingButton(Icons.layers_outlined),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _floatingButton(Icons.my_location),
-                        const VariantsPill(),
-                      ],
-                    ),
-                  ],
-                ),
+          Positioned(
+            bottom: 100,
+            left: 16,
+            right: 16,
+            child: ReusableAnimation(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _floatingButton(Icons.layers_outlined),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _floatingButton(Icons.my_location),
+                      const VariantsPill(),
+                    ],
+                  ),
+                ],
               ),
+            ),
+          ),
 
-              // Bottom Nav with reusable animation
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: SlideUpAnimation(
-                  child: const CustomBottomNavBar(),
-                ),
-              ),
-            ],
-          );
-        },
+          // Bottom Nav with reusable animation
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SlideUpAnimation(
+              child: const CustomBottomNavBar(),
+            ),
+          ),
+        ],
       ),
     );
   }
